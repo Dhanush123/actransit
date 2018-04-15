@@ -23,6 +23,7 @@ function stopPredict(gBody, gRes) {
             console.log("got in!")
             console.log("The address " + gBody.result.parameters.address)
             stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address)).StopId
+            console.log(Object.keys(stopID))
         }
         else if (gBody.result.parameters.stopID != ''){
             console.log("wrong adn " + gBody.result.parameters.stopID)
