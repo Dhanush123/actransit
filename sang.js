@@ -45,18 +45,10 @@ function getServiceNoticesHelper(notices, gRes, source) {
       url: noticeURL
   };
 
-    var msgSent = {
+    var msgObject = {
       displayText: displayMsg,
       speech: msg,
-      platform: "google",
-      type: 0
-    };
-
-    var msgObject = {
-      messages: [
-        msgSent,
-        linkSent
-      ]
+      messages: linkSent
     };
 
     console.log(JSON.stringify(msgObject));
