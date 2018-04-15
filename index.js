@@ -20,10 +20,10 @@ server.post('/', function (req, res) {
             dhanush.stopPredict(req.body,res);
             break;
         case "closestBusStop":
-            allen.closestBusStop(req, res);
+            allen.closestBusStop(req.body, res);
             break;
         case "user_info":
-            allen.closestBusStop(req, res)
+            allen.closestBusStop(req.body, res)
         case "getServiceNotices":
             sang.getServiceNotices(req.body,res);
             break;
