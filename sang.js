@@ -48,7 +48,7 @@ function getServiceNoticesHelper(notices, gRes, source) {
     var msgObject = {
       displayText: displayMsg,
       speech: msg,
-      messages: linkSent
+      messages: [linkSent]
     };
 
     console.log(JSON.stringify(msgObject));
