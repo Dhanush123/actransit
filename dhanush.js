@@ -11,7 +11,7 @@ function stopPredict(gBody, gRes) {
 
 	var stops = []
 
-	rp(op1)
+	request(op1)
     	.then(response => {
     		stops = JSON.parse(response)
     		console.log("The stops are " + stops)
@@ -19,8 +19,21 @@ function stopPredict(gBody, gRes) {
     	.catch(err => console.error(err))
 
 
+    var stopID = null;
+    if (gBody.result.parameters.stopID == undefined && gBody.result.parameters.address != undefined){
+    	stopID = stops.find(o => o.Name == gBody.result.parameters.address)
+    }
+    else if (gBody.result.parameters.stopID != undefined){
+    	stopID = gBody.result.parameters.stopID;
+    }
+    else{
+    	gRes.json({
+	        speech: "I need either stop id or the address",
+	        displayText: "I need either stop id or the address"
+	    });
+    }
 
-    var stopID = gBody.result.parameters.stopID;
+    
     var options = { method: "GET",
     	url: "http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=actransit&stopId="+stopID
     };
