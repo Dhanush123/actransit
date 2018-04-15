@@ -13,6 +13,7 @@ function getServiceNotices(body, gRes) {
 
   request(option, function(err, res, body) {
     var notices = JSON.parse(body).slice(0, 1);
+    console.log(body);
     var source = body.originalRequest.source;
     getServiceNoticesHelper(notices, gRes, source);
   });
