@@ -26,7 +26,7 @@ function stopPredict(gBody, gRes) {
       for(var i = 0; i < predictions.length; i++) {
       	msg += "Route " + body.predictions[i]["routeTitle"] + " will be arriving at "
       	for(var j = 0; j < predictions[i].direction.prediction.length; j++){
-	        var time = moment.unix((predictions[i].direction.prediction[j]["epochTime"]);
+	        var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]);
 	        msg += time;
 	        if(j != predictions[i].direction.prediction.length-1){
 	        	msg += ", ";
