@@ -25,6 +25,5 @@ function getRoutesForStop (gBody, gRes) {
 }
 
 module.exports = {
-    getRoutesForStop: getRoutesForStop,
-    getStopForRoute: getStopForRoute
+    getRoutesForStop: getRoutesForStop
 };
