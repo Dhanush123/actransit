@@ -13,7 +13,6 @@ function getServiceNotices(gBody, gRes) {
 
   request(option, function(err, res, body) {
     var notices = JSON.parse(body).slice(0, 1);
-    console.log(gBody);
     var source = gBody.originalRequest.source;
     getServiceNoticesHelper(notices, gRes, source);
   });
@@ -46,10 +45,13 @@ function getServiceNoticesHelper(notices, gRes, source) {
       url: noticeURL
     };
 
-    var msgObject = {
+    var messages = {
       speech: msg,
       displayText: displayMsg,
-      messages: [link]
+    };
+
+    var msgObject = {
+      messages: [link, messages]
     };
 
     console.log(JSON.stringify(msgObject));
