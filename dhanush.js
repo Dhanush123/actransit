@@ -24,6 +24,7 @@ function stopPredict(gBody, gRes) {
             console.log("The address " + gBody.result.parameters.address)
             stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address)).StopId
         }
+        console.log("stopID is " + gBody.result.parameters.stopID)
         else if (gBody.result.parameters.stopID != ''){
             console.log("wrong adn " + gBody.result.parameters.stopID)
             stopID = gBody.result.parameters.stopID;
@@ -36,7 +37,7 @@ function stopPredict(gBody, gRes) {
         }
     })
     .then(() => {
-        console.log("stopID is " + stopID)
+        
 
         var options = { method: "GET",
             url: "http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=actransit&stopId="+stopID
