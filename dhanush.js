@@ -17,7 +17,7 @@ function stopPredict(gBody, gRes) {
       body = JSON.parse(body);
       const predictions = []
       if (body.predictions.length != undefined){
-      	predictions = body.predictions
+      	predictions.concat(body.predictions)
       }
       else{
       	predictions.push(body.predictions)
