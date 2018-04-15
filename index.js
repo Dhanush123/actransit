@@ -25,6 +25,7 @@ server.post('/', function (req, res) {
             break;
         case "user_info":
             allen.closestBusStop(req, res)
+            break;
         case "getServiceNotices":
             sang.getServiceNotices(req.body,res);
             break;
