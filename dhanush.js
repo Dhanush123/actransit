@@ -24,6 +24,7 @@ function stopPredict(gBody, gRes) {
     })
     .then(() => {
         console.log("stopID is " + stopID)
+        console.log("address is " + gBody.result.parameters.address)
         if (isEmpty(gBody.result.parameters.stopID) && !isEmpty(gBody.result.parameters.address)){
             console.log("got in!")
             console.log("The address " + gBody.result.parameters.address)
