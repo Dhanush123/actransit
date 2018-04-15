@@ -11,7 +11,19 @@ function closestBusStop(request, response) {
         if (app.isPermissionGranted()) {
             const address = app.getDeviceLocation().coordinates;
             if (address) {            
-                app.tell(`You are at ${address.latitude} ${address.longitude}`);
+                const search_radius = 1320
+                // e.g. 58123
+                //const stopID = body.result.parameters.stopID;
+                const options = {
+                    url: `http://api.actransit.org/transit/stops/${address.latitude}/${address.longitude}/${search_radius}`,
+                    qs: { token: "E0CA7D29754DBC1A2945AC2B353206DD" },
+                };
+
+                rp(options)
+                .then(response => {
+                    app.tell(`Bus stop ${response[0].name}`);
+                })
+                .catch(err => app.tell('Sorry, I could not find any bus stops near you.');)
             }
             else {
                 // Note: Currently, precise locaton only returns lat/lng coordinates on phones and lat/lng coordinates 
@@ -34,18 +46,6 @@ function closestBusStop(request, response) {
     actions.set('user_info', userInfo);
     app.handleRequest(actions);
 
- //    // e.g. 58123
- //    //const stopID = body.result.parameters.stopID;
- //    const options = {
- //        url: "http://api.actransit.org/transit/stops/"+58123+"/predictions/",
- //        qs: { token: "E0CA7D29754DBC1A2945AC2B353206DD" },
- //    };
-
-	// rp(options)
- //    .then(response => {
- //        console.log(response)
- //    })
- //    .catch(err => console.error(err.message))
 	
 	// const response = 'hello world'
 	// res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
