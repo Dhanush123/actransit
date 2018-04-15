@@ -21,7 +21,7 @@ function closestBusStop(request, response) {
 
                 rp(options)
                 .then(response => {
-                    app.tell(`Bus stop https://www.google.com/maps/@37.8795413,-122.27106,15z`);
+                    app.tell(`Bus stop at ${response[0].name} https://www.google.com/maps/@?api=1&map_action=map&center=${address.latitude},${address.longitude}&zoom=12`);
                 })
                 .catch(err => app.tell('Sorry, I could not find any bus stops near you.'));
             }
