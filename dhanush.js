@@ -15,10 +15,9 @@ function stopPredict(gBody, gRes) {
       msg = "Currently, predictions are not available for stop " + stopID + ". Please try later.";
     } else {
       body = JSON.parse(body);
-      body = body.predictions.direction.prediction
-      for(var i = 0; i < body.length; i++) {
-        var time = moment(body[i]["PredictedDeparture"]);
-        msg += body[i]["RouteName"] + " will be arriving " + time.calendar() +"\n  \n";
+      for(var i = 0; i < body.predictions.direction.prediction.length; i++) {
+        var time = moment(body.predictions.direction.prediction.[i]["epochTime"]);
+        msg += body.predictions["routeTitle"] + " will be arriving " + time.calendar() +"\n  \n";
       }
       console.log(JSON.stringify(body));
       msg = msg.substring(0, 1600);
