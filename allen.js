@@ -10,6 +10,8 @@ function closestBusStop(request, response) {
     const userInfo = (app) => {
         if (app.isPermissionGranted()) {
             const address = app.getDeviceLocation().address;
+
+            console.log("userInfo is being called")
             if (address) {            
                 app.tell({speech: `You are at ${address}`, displayText: `You are at ${address}`});
             }
