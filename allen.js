@@ -24,7 +24,8 @@ function closestBusStop(req, res) {
         }
     };
 
-    console.log("from allen: ", req, req.body)
+    console.log("from allen request: ", req)
+    console.log("request body: ", req.body)
 
     const app = new DialogflowApp({req, res});
     const actions = new Map();
