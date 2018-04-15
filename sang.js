@@ -13,11 +13,12 @@ function getServiceNotices(body, gRes) {
 
   request(option, function(err, res, body) {
     var notices = JSON.parse(body).slice(0, 1);
-    getServiceNoticesHelper(notices, gRes);
+    var source = body.originalRequest.source;
+    getServiceNoticesHelper(notices, gRes, source);
   });
 }
 
-function getServiceNoticesHelper(notices, gRes) {
+function getServiceNoticesHelper(notices, gRes, source) {
   var msg = "";
   var displayMsg = "";
   msg += "Here are the latest service notice." + writeNewLine(2);
@@ -36,13 +37,25 @@ function getServiceNoticesHelper(notices, gRes) {
     displayMsg += writeNewLine(2);
   }
 
-  return gRes.json({
-    speech: msg,
-    displayText: displayMsg,
-    destinationName: "more information",
-    platform: "google",
-    url: noticeURL
-  });
+  if (source === 'google') {
+    var link = {
+      destinationName: "more information",
+      platform: "google",
+      type: "link_out_chip",
+      url: noticeURL
+    };
+
+    return gRes.json({
+      speech: msg,
+      displayText: displayMsg,
+      messages: card
+    });
+  } else {
+    return gRes.json({
+      speech: msg,
+      displayText: displayMsg
+    });
+  }
 }
 
 function writeSpeechMessage(index, postDate, title, text, impactedRoutes) {
