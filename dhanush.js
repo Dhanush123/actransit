@@ -11,6 +11,7 @@ function stopPredict(gBody, gRes) {
 	}
 
 	var stops = []
+    console.log("parameters " + gBody.result.parameters)
     var stopID = gBody.result.parameters.stopID;
 
 	rp(op1)
@@ -19,7 +20,7 @@ function stopPredict(gBody, gRes) {
         console.log("The stops are " + stops[0])
     })
     .then(() => {
-        console.log("stopID is " + gBody.result.parameters.stopID)
+        console.log("stopID is " + stopID)
         if (gBody.result.parameters.stopID == '' && gBody.result.parameters.address != ''){
             console.log("got in!")
             console.log("The address " + gBody.result.parameters.address)
