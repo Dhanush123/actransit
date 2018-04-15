@@ -13,9 +13,13 @@ function stopRequest(gBody, gRes) {
     if (error) throw new Error(error);
     var msg = "";
     for(var i = 0; i < body.length; i++) {
-        var time = moment(body[0]["PredictedDeparture"]);
-        msg += "Bus " + body[0]["VehicleId"] + ", " + body[0]["RouteName"] + ", will be arriving " + time.calendar() +"\n";
+        var time = moment(body[i]["PredictedDeparture"]);
+        msg += "Bus " + body[i]["VehicleId"] + ", " + body[i]["RouteName"] + ", will be arriving " + time.calendar() +"\n  \n";
     }
+    gRes.json({
+        speech: msg,
+        displayText: msg
+    });
   });
   
 }
