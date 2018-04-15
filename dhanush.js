@@ -9,7 +9,10 @@ function stopRequest(gBody, gRes) {
   
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
-    
+    var msg = "";
+    for(var i = 0; i < body.length; i++) {
+        var 
+    }
   });
   
 }
