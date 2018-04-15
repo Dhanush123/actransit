@@ -1,5 +1,5 @@
 module.exports  = (req, res) => {
-	console.log('sdf')
+	console.log('bus_stop called')
 	
 	const response = 'hello world'
 	res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
