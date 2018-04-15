@@ -19,7 +19,7 @@ server.post('/', function (req, res) {
             dhanush.stopPredict(req.body,res);
             break;
         case "closestBusStop":
-            closestBusStop(req, res);
+            allen.closestBusStop(req.body, res);
             break;
         default:
             var speech = "An error has occured.";
