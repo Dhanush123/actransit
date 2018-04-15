@@ -10,15 +10,18 @@ function getRoutesForStop (gBody, gRes) {
 	var options = { method: "GET",
 	    url: "http://api.actransit.org/transit/stops/"+stopID+"/predictions/",
 	    qs: { token: token }};
+
 	request(options, function (error, response, body) {
 	    if (error) throw new Error(error);
+
+	    body = JSON.parse(body);
 	    var msg = "The following buses come here: \n";
 	    var seenRouteNames = {};
 	    for(var i = 0; i < body.length; i++) {
 	    	var name = body[i]["RouteName"];
-		console.log(body);
+				console.log(body);
 	    	if (!seenRouteNames[name]) {
-	        	msg += name +"\n";
+	        	msg += "route " + name +"\n";
 	        	seenRouteNames[name] = true;
 	    	}
 	    }
