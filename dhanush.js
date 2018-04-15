@@ -34,7 +34,7 @@ function stopPredict(gBody, gRes) {
       	}
       	msg += "\n"
       }
-      console.log(JSON.stringify(body));
+      console.log(msg);
     }
     gRes.json({
         speech: msg,
