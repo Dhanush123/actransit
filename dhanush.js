@@ -49,32 +49,33 @@ function stopPredict(gBody, gRes) {
           msg = "Currently, predictions are not available for stop " + stopID + ". Please try later.";
         } else {
           body = JSON.parse(body);
-          var predictions = []
-          if (body.predictions.length != undefined){
-            predictions = body.predictions.slice()
-          }
-          else{
-            predictions.push(body.predictions)
-          }
+          console.log(body)
+          // var predictions = []
+          // if (body.predictions.length != undefined){
+          //   predictions = body.predictions.slice()
+          // }
+          // else{
+          //   predictions.push(body.predictions)
+          // }
 
-          for(var i = 0; i < predictions.length; i++) {
-            msg += "Route " + predictions[i]["routeTitle"] + " will be arriving at "
-            for(var j = 0; j < predictions[i].direction.prediction.length; j++){
-                var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
-                msg += time;
-                if(j != predictions[i].direction.prediction.length-1){
-                    msg += ", ";
-                }
-            }
-            msg += "\n\n"
-          }
+          // for(var i = 0; i < predictions.length; i++) {
+          //   msg += "Route " + predictions[i]["routeTitle"] + " will be arriving at "
+          //   for(var j = 0; j < predictions[i].direction.prediction.length; j++){
+          //       var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
+          //       msg += time;
+          //       if(j != predictions[i].direction.prediction.length-1){
+          //           msg += ", ";
+          //       }
+          //   }
+          //   msg += "\n\n"
+          // }
         }
 
         gRes.json({
             speech: msg,
             displayText: msg
         });
-        
+
       });
     })
     .catch(err => console.error(err))
