@@ -15,10 +15,10 @@ function stopPredict(gBody, gRes) {
       msg = "Currently, predictions are not available for stop " + stopID + ". Please try later.";
     } else {
       body = JSON.parse(body);
-      const predictions = []
+      var predictions = []
       if (body.predictions.length != undefined){
       	console.log("not undefined")
-      	predictions.concat(body.predictions)
+      	predictions = body.predictions.slice()
       }
       else{
       	console.log("is indeed undefined")
