@@ -19,12 +19,12 @@ function stopPredict(gBody, gRes) {
         console.log("The stops are " + stops[0])
     })
     .then(() => {
+        console.log("stopID is " + gBody.result.parameters.stopID)
         if (gBody.result.parameters.stopID == '' && gBody.result.parameters.address != ''){
             console.log("got in!")
             console.log("The address " + gBody.result.parameters.address)
             stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address)).StopId
         }
-        console.log("stopID is " + gBody.result.parameters.stopID)
         else if (gBody.result.parameters.stopID != ''){
             console.log("wrong adn " + gBody.result.parameters.stopID)
             stopID = gBody.result.parameters.stopID;
