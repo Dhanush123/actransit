@@ -2,10 +2,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
-const closestBusStop = require('./allen')
+const closestBusStop = require('allen.js');
 
 //custom imports
-const dhanush = require('./dhanush');
+const dhanush = require('dhanush.js');
 //end here
 
 const server = express();
