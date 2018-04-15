@@ -2,7 +2,7 @@ const request = require("request");
 const moment = require("moment");
 
 
-function stopRequest(gBody, gRes) {
+function stopPredict(gBody, gRes) {
     var stopID = gBody.result.parameters.stopID;
     var options = { method: "GET",
     url: "http://api.actransit.org/transit/stops/"+stopID+"/predictions/",
@@ -14,7 +14,7 @@ function stopRequest(gBody, gRes) {
     var msg = "";
     for(var i = 0; i < body.length; i++) {
         var time = moment(body[i]["PredictedDeparture"]);
-        msg += "Bus " + body[i]["VehicleId"] + ", " + body[i]["RouteName"] + ", will be arriving " + time.calendar() +"\n  \n";
+        msg += body[i]["RouteName"] + ", will be arriving " + time.calendar() +"\n  \n";
     }
     gRes.json({
         speech: msg,
@@ -25,5 +25,5 @@ function stopRequest(gBody, gRes) {
 }
 
 module.exports = {
-    stopRequest: stopRequest
+    stopPredict: stopPredict
 };
