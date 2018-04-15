@@ -12,7 +12,7 @@ function stopPredict(gBody, gRes) {
 
 	var stops = []
 
-	request(op1)
+	rp(op1)
     	.then(response => {
     		stops = JSON.parse(response)
     		console.log("The stops are " + stops)
