@@ -32,7 +32,7 @@ function stopPredict(gBody, gRes) {
 	        	msg += ", ";
 	        }
       	}
-      	msg += "\n"
+      	msg += "\n\n"
       }
     }
     gRes.json({
