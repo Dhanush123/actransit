@@ -45,13 +45,20 @@ function getServiceNoticesHelper(notices, gRes, source) {
       url: noticeURL
     };
 
-    var msgSent = {
-      displayText: displayMsg,
+    var speechSent = {
       speech: msg,
-    }
+      type: 0,
+    };
+
+    var displayTextSent = {
+      displayText: displayMsg,
+      platform: "google",
+      textToSpeech: "Audio response",
+      type: "simple_response"
+    };
 
     var msgObject = {
-      messages: [msgSent, linkSent]
+      messages: [speechSent, displayTextSent, linkSent]
     };
 
     console.log(JSON.stringify(msgObject));
@@ -79,7 +86,7 @@ function writeDisplayMessage(index, postDate, title, text, impactedRoutes, notic
   /* return the message that will be displayed in the chat */
   var displayMsg = "";
   displayMsg += writeSpeechMessage(index, postDate, title, text, impactedRoutes);
-  displayMsg += "For more information, please check " + noticeURL + "." + writeNewLine(1);
+  displayMsg += "For more information, please open more information." + writeNewLine(1);
   return displayMsg;
 }
 
