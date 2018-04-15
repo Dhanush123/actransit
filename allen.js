@@ -27,7 +27,7 @@ function closestBusStop(request, response) {
                     for(var i = 0; i < 3; i++){
                         stops_names.push(stop[i].Name);
                     }
-                    app.tell(app
+                    app.ask(app
                         .buildRichResponse()
                         .addSimpleResponse(`Nearby stations: ${stops_names[0]}, ${stops_names[1]}, ${stops_names[2]}. ` + 
                             "Pick one to see buses coming. "
