@@ -13,24 +13,26 @@ function getServiceNotices(body, gRes) {
   };
 
   request(option, function(err, res, body) {
-    var noticies = JSON.parse(body).slice(0, 3);
-    getServiceNoticesHelper(noticies, gRes);
+    var notices = JSON.parse(body).slice(0, 2);
+    getServiceNoticesHelper(notices, gRes);
   });
 }
 
-function getServiceNoticesHelper(noticies, gRes) {
+function getServiceNoticesHelper(notices, gRes) {
   var msg = "";
   msg += "Today's notices\n";
   msg += "Here are 3 latest notices\n\n";
-  for (var i = 0; i < noticies.length; i++) {
-    var notice = noticies[i];
+  for (var i = 0; i < notices.length; i++) {
+    var notice = notices[i];
     var postDate = notice.PostDate;
     var title = notice.Title;
     var text = textFormatting(notice.NoticeText);
+    var noticeURL = notice.Url;
     var impactedRoutes = impactedRoutesFormatting(notice.ImpactedRoutes);
     msg += i + 1 + "." + " " + postDate + "\n";
     msg += "Title : " + title + "\n";
     msg += text + "\n";
+    msg += "For more information, please check " + noticeURL + "\n";
     msg += "" + impactedRoutes + "\n\n\n";
   }
   return gRes.json({
@@ -50,10 +52,9 @@ function impactedRoutesFormatting(impactedRoutes) {
 }
 
 function textFormatting(text) {
-  text = text.split("---").join('\n');
-  text = text.split("<hr />").join('');
-  text = text.split('\r\n\r\n');
-  return text.join('\n');
+  text = [text.split("<hr />")[0]].join('');
+  text = [text.split('\r\n\r\n')[0]].join('');
+  return text;
 }
 
 module.exports = {
