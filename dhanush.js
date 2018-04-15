@@ -69,16 +69,22 @@ function stopPredict(gBody, gRes) {
                     });
                 }
                 else{
-                    console.log("prediction is " + Object.keys(predictions[i].direction.prediction))
+                    console.log("prediction is " + Object.keys())
                     console.log("is array? " + predictions[i].direction.prediction instanceof Array)
-                    for(var j = 0; j < predictions[i].direction.prediction.length; j++){
-                        var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
-                        console.log("The time is " + time)
-                        msg += time;
-                        if(j != predictions[i].direction.prediction.length-1){
-                            msg += ", ";
+                    if (predictions[i].direction.prediction.length == undefined){
+                        msg += moment.unix(predictions[i].direction.prediction.epochTime).format('hh:mm a');
+                    }
+                    else{
+                        for(var j = 0; j < predictions[i].direction.prediction.length; j++){
+                            var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
+                            console.log("The time is " + time)
+                            msg += time;
+                            if(j != predictions[i].direction.prediction.length-1){
+                                msg += ", ";
+                            }
                         }
                     }
+                    
                 }
                 msg += "\n\n"
               }
@@ -87,9 +93,8 @@ function stopPredict(gBody, gRes) {
             gRes.json({
                 speech: msg,
                 displayText: msg
-            });
-
-        });
+            });  
+        })
     })
     .catch(err => console.error(err))
 
