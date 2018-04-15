@@ -11,7 +11,7 @@ function stopRequest(gBody, gRes) {
     if (error) throw new Error(error);
     var msg = "";
     for(var i = 0; i < body.length; i++) {
-        var 
+        var x = 0;
     }
   });
   
