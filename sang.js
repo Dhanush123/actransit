@@ -38,18 +38,11 @@ function getServiceNoticesHelper(notices, gRes, source) {
   }
 
   if (source === 'google') {
-    var card = {
-      buttons: [
-        {
-          url: noticeURL,
-          title: "more information"
-        }
-      ],
-      "imageUrl": "",
-      "platform": "google",
-      "subtitle": "",
-      "title": "",
-      "type": 1
+    var link = {
+      destinationName: "more information",
+      platform: "google",
+      type: "link_out_chip",
+      url: noticeURL
     };
 
     return gRes.json({
