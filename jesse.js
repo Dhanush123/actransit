@@ -24,7 +24,7 @@ function getRoutesForStop (gBody, gRes) {
           var name = body[i]["RouteName"];
           console.log(body);
           if (!seenRouteNames[name]) {
-            msg += "route " + name +"\n";
+            msg += name +"\n";
             seenRouteNames[name] = true;
           }
         }
