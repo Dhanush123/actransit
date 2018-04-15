@@ -38,25 +38,14 @@ function getServiceNoticesHelper(notices, gRes, source) {
   }
 
   if (source === 'google') {
-    var cardSent =   {
-      buttons: [
-        {
-          openUrlAction: {
-            url: noticeURL
-          },
-          title: "More info"
-        }
-      ],
-      image: {
-        url: ""
-      },
+    var linkSent = {
+      destinationName: "more information",
       platform: "google",
-      subtitle: "link url",
-      title: "url",
-      type: "basic_card"
-    };
+      type: "link_out_chip",
+      url: noticeURL
+  };
 
-    var messageSent  = {
+    var msgSent = {
       displayText: displayMsg,
       speech: msg,
       platform: "google",
@@ -65,8 +54,8 @@ function getServiceNoticesHelper(notices, gRes, source) {
 
     var msgObject = {
       messages: [
-        messageSent,
-        cardSent
+        msgSent,
+        linkSent
       ]
     };
 
