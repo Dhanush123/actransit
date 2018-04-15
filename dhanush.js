@@ -14,13 +14,11 @@ function stopPredict(gBody, gRes) {
 	}
 
 	var stops = []
-    console.log("parameters " + Object.keys(gBody.result.parameters))
     var stopID = gBody.result.parameters.stopID;
 
 	rp(op1)
     .then(response => {
         stops = JSON.parse(response)
-        console.log("The stops are " + stops[0])
     })
     .then(() => {
         console.log("stopID is " + stopID)
@@ -65,12 +63,14 @@ function stopPredict(gBody, gRes) {
               for(var i = 0; i < predictions.length; i++) {
                 msg += "Route " + predictions[i]["routeTitle"] + " will be arriving at "
                 if (predictions[i].direction == undefined){
+                    console.log("no predictions")
                     gRes.json({
                         speech: "No prediction",
                         displayText: "No prediction"
                     });
                 }
                 else{
+                    console.log("have predictions")
                     for(var j = 0; j < predictions[i].direction.prediction.length; j++){
                         var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
                         msg += time;
