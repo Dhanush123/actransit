@@ -16,7 +16,7 @@ function stopPredict(gBody, gRes) {
     } else {
       body = JSON.parse(body);
       for(var i = 0; i < body.predictions.direction.prediction.length; i++) {
-        var time = moment(body.predictions.direction.prediction.[i]["epochTime"]);
+        var time = moment(body.predictions.direction.prediction[i]["epochTime"]);
         msg += body.predictions["routeTitle"] + " will be arriving " + time.calendar() +"\n  \n";
       }
       console.log(JSON.stringify(body));
