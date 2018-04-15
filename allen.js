@@ -9,7 +9,7 @@ function closestBusStop(request, response) {
     
     const userInfo = (app) => {
         if (app.isPermissionGranted()) {
-            const address = app.getDeviceLocation().coordinates;
+            const address = app.getDeviceLocation().formattedAddress;
             if (address) {            
                 app.tell(`You are at ${address}`);
             }
