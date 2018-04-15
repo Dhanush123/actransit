@@ -10,21 +10,21 @@ const dhanush = require('dhanush.js');
 
 const server = express();
 server.use(bodyParser.json());
-server.use('/bus_stop', bus_stop);
 
-// server.post('/', function (req, res) {
-//     console.log('webhook request:',req.body);
-//     if (req.body.result.action == "stopPredict") {
-//       //call function here
-//     }
-//     else {
-//       var speech = "An error has occured.";
-//       return res.json({
-//         speech: speech,
-//         displayText: speech
-//       });
-//     }
-// });
+server.post('/', function (req, res) {
+    console.log('webhook request:',req.body);
+    switch (req.body.result.action) {
+        case "stopPredict":
+            dhanush.stopPredict(req.body,res);
+            break;
+        default:
+            var speech = "An error has occured.";
+            return res.json({
+                speech: speech,
+                displayText: speech
+            });
+    }
+});
   
 server.listen((process.env.PORT || 8000), function () {
     console.log('Server listening');
