@@ -24,6 +24,8 @@ function closestBusStop(req, res) {
         }
     };
 
+    console.log("from allen: ", req)
+
     const app = new DialogflowApp({req, res});
     const actions = new Map();
     actions.set('closestBusStop', requestPermission);
