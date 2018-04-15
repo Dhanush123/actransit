@@ -4,12 +4,11 @@
 var request = require('request');
 
 function getServiceNotices(body, gRes) {
-  // TODO fix this part. It is hardcoded now.
   const APIKey = "E0CA7D29754DBC1A2945AC2B353206DD";
   const apiEndpoint = "http://api.actransit.org/transit/servicenotices/?token=" + APIKey;
   var option = {
     method: 'GET',
-    url: apiEndpoint,
+    url: apiEndpoint
   };
 
   request(option, function(err, res, body) {
@@ -20,8 +19,9 @@ function getServiceNotices(body, gRes) {
 
 function getServiceNoticesHelper(notices, gRes) {
   var msg = "";
-  msg += "Today's notices\n";
-  msg += "Here are 3 latest notices\n\n";
+  var displayMsg = "";
+  msg += "Here are the " + notices.length + "latest notices\n\n";
+
   for (var i = 0; i < notices.length; i++) {
     var notice = notices[i];
     var postDate = notice.PostDate;
@@ -29,15 +29,20 @@ function getServiceNoticesHelper(notices, gRes) {
     var text = textFormatting(notice.NoticeText);
     var noticeURL = notice.Url;
     var impactedRoutes = impactedRoutesFormatting(notice.ImpactedRoutes);
+
     msg += i + 1 + "." + " " + postDate + "\n";
     msg += "Title : " + title + "\n";
     msg += text + "\n";
-    msg += "For more information, please check " + noticeURL + "\n";
     msg += "" + impactedRoutes + "\n\n\n";
+
+    // display msg will show url information
+    displayMsg = msg;
+    displayMsg += "For more information, please check " + noticeURL + "\n";
   }
+
   return gRes.json({
     speech: msg,
-    displayText: msg
+    displayText: displayMsg
   });
 }
 
