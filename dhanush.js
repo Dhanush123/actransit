@@ -21,12 +21,12 @@ function stopPredict(gBody, gRes) {
 
 
     var stopID = null;
-    if (gBody.result.parameters.stopID == undefined && gBody.result.parameters.address != undefined){
+    if (gBody.result.parameters.stopID == '' && gBody.result.parameters.address != ''){
         console.log("got in!")
         console.log("The address " + gBody.result.parameters.address)
     	stopID = stops.find(o => o.Name == gBody.result.parameters.address)
     }
-    else if (gBody.result.parameters.stopID != undefined){
+    else if (gBody.result.parameters.stopID != ''){
         console.log("wrong adn " + gBody.result.parameters.stopID)
     	stopID = gBody.result.parameters.stopID;
     }
