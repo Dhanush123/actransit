@@ -6,5 +6,5 @@ function closestBusStop(body, res) {
   	res.send(JSON.stringify({ "speech": response, "displayText": response}))
 }
 
-module.export = { closestBusStop }
+module.exports = { closestBusStop }
 
