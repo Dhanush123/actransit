@@ -60,11 +60,19 @@ function stopPredict(gBody, gRes) {
 
           for(var i = 0; i < predictions.length; i++) {
             msg += "Route " + predictions[i]["routeTitle"] + " will be arriving at "
-            for(var j = 0; j < predictions[i].direction.prediction.length; j++){
-                var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
-                msg += time;
-                if(j != predictions[i].direction.prediction.length-1){
-                    msg += ", ";
+            if (predictions[i].direction == undefined){
+                gRes.json({
+                    speech: "No prediction",
+                    displayText: "No prediction"
+                });
+            }
+            else{
+                for(var j = 0; j < predictions[i].direction.prediction.length; j++){
+                    var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
+                    msg += time;
+                    if(j != predictions[i].direction.prediction.length-1){
+                        msg += ", ";
+                    }
                 }
             }
             msg += "\n\n"
