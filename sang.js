@@ -43,20 +43,15 @@ function getServiceNoticesHelper(notices, gRes, source) {
       platform: "google",
       type: "link_out_chip",
       url: noticeURL
-  };
+    };
 
     var msgSent = {
       displayText: displayMsg,
       speech: msg,
-      platform: "google",
-      type: 0
-    };
+    }
 
     var msgObject = {
-      messages: [
-        msgSent,
-        linkSent
-      ]
+      messages: [msgSent, linkSent]
     };
 
     console.log(JSON.stringify(msgObject));
