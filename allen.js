@@ -22,18 +22,26 @@ function closestBusStop(request, response) {
                 rp(options)
                 .then(response => {
                     const the_stop = JSON.parse(response)[0];
-                    app.tell(app
+                    const stop= JSON.parse(response);
+                    var stops_names = [];
+                    for(var i = 0; i < 3; i++){
+                        stops_names.push(stop[i].Name);
+                    }
+                    app.ask(app
                         .buildRichResponse()
-                        .addSimpleResponse(`Bus stop at ${the_stop.Name}`)
-                        .addSuggestionLink("Google map", `https://www.google.com/maps/search/?api=1&query=${the_stop.Latitude},${the_stop.Longitude}`))
+                        .addSimpleResponse(`Nearby stations: ${stops_names[0]}, ${stops_names[1]}, ${stops_names[2]}. ` + 
+                            "Pick one to see buses coming. "
+                            )
+                        .addSuggestions(stops_names)
+                        .addSuggestionLink("Closest Station", `https://www.google.com/maps/search/?api=1&query=${the_stop.Latitude},${the_stop.Longitude}`))
                 })
-                .catch(err => app.tell('Sorry, I could not find any bus stops near you.'));
+                .catch(err => app.ask('Sorry, I could not find any bus stops near you.'));
             }
             else {
                 // Note: Currently, precise locaton only returns lat/lng coordinates on phones and lat/lng coordinates 
                 // and a geocoded address on voice-activated speakers. 
                 // Coarse location only works on voice-activated speakers.
-                app.tell('Sorry, I could not figure out where you are.');
+                app.ask('Sorry, I could not figure out where you are.');
             }
         } else {
             app.tell('Good luck finding the bus stop, lol.');
