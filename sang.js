@@ -30,20 +30,44 @@ function getServiceNoticesHelper(notices, gRes) {
     var noticeURL = notice.Url;
     var impactedRoutes = impactedRoutesFormatting(notice.ImpactedRoutes);
 
-    msg += i + 1 + "." + " " + postDate + "\n";
-    msg += "Title : " + title + "\n";
-    msg += text + "\n";
-    msg += "" + impactedRoutes + "\n\n\n";
-
-    // display msg will show url information
-    displayMsg = msg;
-    displayMsg += "For more information, please check " + noticeURL + "\n";
+    msg += writeSpeechMessage(i, postDate, title, text, impactedRoutes);
+    msg += writeNewLine(2);
+    displayMsg += writeDisplayMessage(i, postDate, title, text, impactedRoutes, noticeURL);
+    displayMsg += writeNewLine(2);
   }
-
-  return gRes.json({
+  console.log(msg);
+  console.log(displayMsg);
+  /*return gRes.json({
     speech: msg,
     displayText: displayMsg
-  });
+  });*/
+}
+
+function writeSpeechMessage(index, postDate, title, text, impactedRoutes) {
+  /* return the message for a speaker to speak */
+  var msg = "";
+  msg += index + 1 + "." + " " + postDate + "\n";
+  msg += "Title : " + title + "\n";
+  msg += text + "\n";
+  msg += "" + impactedRoutes + "\n";
+  return msg;
+}
+
+function writeDisplayMessage(index, postDate, title, text, impactedRoutes, noticeURL) {
+  /* return the message that will be displayed in the chat */
+  var displayMsg = "";
+  displayMsg += writeSpeechMessage(index, postDate, title, text, impactedRoutes);
+  displayMsg += "For more information, please check " + noticeURL + "\n";
+  return displayMsg;
+}
+
+function writeNewLine(numberOfNewLine) {
+  /* write the new line as many as numberOfNewLine */
+  var newLine = "";
+  for (var i = 0; i < numberOfNewLine; i++) {
+    newLine += '\n';
+  }
+  return newLine;
 }
 
 // util
@@ -61,6 +85,8 @@ function textFormatting(text) {
   text = [text.split('\r\n\r\n')[0]].join('');
   return text;
 }
+
+getServiceNotices(null, null)
 
 module.exports = {
   getServiceNotices: getServiceNotices
