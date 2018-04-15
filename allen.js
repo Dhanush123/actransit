@@ -23,7 +23,7 @@ function closestBusStop(request, response) {
                 .then(response => {
                     app.tell(`Bus stop ${response[0].name}`);
                 })
-                .catch(err => app.tell('Sorry, I could not find any bus stops near you.');)
+                .catch(err => app.tell('Sorry, I could not find any bus stops near you.'));
             }
             else {
                 // Note: Currently, precise locaton only returns lat/lng coordinates on phones and lat/lng coordinates 
