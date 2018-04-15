@@ -37,10 +37,10 @@ function getServiceNoticesHelper(notices, gRes) {
   }
   console.log(msg);
   console.log(displayMsg);
-  /*return gRes.json({
+  return gRes.json({
     speech: msg,
     displayText: displayMsg
-  });*/
+  });
 }
 
 function writeSpeechMessage(index, postDate, title, text, impactedRoutes) {
@@ -85,8 +85,6 @@ function textFormatting(text) {
   text = [text.split('\r\n\r\n')[0]].join('');
   return text;
 }
-
-getServiceNotices(null, null)
 
 module.exports = {
   getServiceNotices: getServiceNotices
