@@ -17,15 +17,17 @@ function stopPredict(gBody, gRes) {
       body = JSON.parse(body);
       const predictions = []
       if (body.predictions.length != undefined){
+      	console.log("not undefined")
       	predictions.concat(body.predictions)
       }
       else{
+      	console.log("is indeed undefined")
       	predictions.push(body.predictions)
       }
 
       console.log("length of predictions " + predictions.length)
       for(var i = 0; i < predictions.length; i++) {
-      	msg += "Route " + body.predictions[i]["routeTitle"] + " will be arriving at "
+      	msg += "Route " + predictions[i]["routeTitle"] + " will be arriving at "
       	for(var j = 0; j < predictions[i].direction.prediction.length; j++){
 	        var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]);
 	        msg += time;
