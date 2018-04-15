@@ -21,7 +21,7 @@ function closestBusStop(request, response) {
 
                 rp(options)
                 .then(response => {
-                    app.tell(`Bus stop ${response[0].name}`);
+                    app.tell(`Bus stop ${response}`);
                 })
                 .catch(err => app.tell('Sorry, I could not find any bus stops near you.'));
             }
