@@ -22,6 +22,8 @@ function stopPredict(gBody, gRes) {
 
     var stopID = null;
     if (gBody.result.parameters.stopID == undefined && gBody.result.parameters.address != undefined){
+        console.log("got in!")
+        console.log("The address " + gBody.result.parameters.address)
     	stopID = stops.find(o => o.Name == gBody.result.parameters.address)
     }
     else if (gBody.result.parameters.stopID != undefined){
