@@ -2,7 +2,7 @@ const request = require("request");
 const moment = require("moment");
 
 
-function stopRequest(gBody, gRes) {
+function stopPredict(gBody, gRes) {
     var stopID = gBody.result.parameters.stopID;
     var options = { method: "GET",
     url: "http://api.actransit.org/transit/stops/"+stopID+"/predictions/",
