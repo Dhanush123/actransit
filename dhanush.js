@@ -11,38 +11,40 @@ function stopPredict(gBody, gRes) {
 	}
 
 	var stops = []
+    var stopID = null;
 
 	rp(op1)
     .then(response => {
         stops = JSON.parse(response)
         console.log("The stops are " + stops[0])
     })
+    .then(() => {
+        if (gBody.result.parameters.stopID == '' && gBody.result.parameters.address != ''){
+            console.log("got in!")
+            console.log("The address " + gBody.result.parameters.address)
+            stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address))
+        }
+        else if (gBody.result.parameters.stopID != ''){
+            console.log("wrong adn " + gBody.result.parameters.stopID)
+            stopID = gBody.result.parameters.stopID;
+        }
+        else{
+            gRes.json({
+                speech: "I need either stop id or the address",
+                displayText: "I need either stop id or the address"
+            });
+        }
+
+        console.log("stopID is " + stopID)
+    })
+    .then(() => {
+         gRes.json({
+            speech: "testing",
+            displayText: "testing"
+        });
+    })
     .catch(err => console.error(err))
 
-
-    var stopID = null;
-    if (gBody.result.parameters.stopID == '' && gBody.result.parameters.address != ''){
-        console.log("got in!")
-        console.log("The address " + gBody.result.parameters.address)
-    	stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address))
-    }
-    else if (gBody.result.parameters.stopID != ''){
-        console.log("wrong adn " + gBody.result.parameters.stopID)
-    	stopID = gBody.result.parameters.stopID;
-    }
-    else{
-    	gRes.json({
-	        speech: "I need either stop id or the address",
-	        displayText: "I need either stop id or the address"
-	    });
-    }
-
-    console.log("stopID is " + stopID)
-
-    gRes.json({
-	        speech: "testing",
-	        displayText: "testing"
-	    });
 
     
   //   var options = { method: "GET",
