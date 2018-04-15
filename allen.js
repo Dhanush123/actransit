@@ -24,7 +24,7 @@ function closestBusStop(request, response) {
                     const the_stop = JSON.parse(response)[0];
                     const stop= JSON.parse(response);
                     var stops_names = [];
-                    for(var i = 0; i < 3; i++){
+                    for(var i = 0; i < 4; i++){
                         stops_names.push(stop[i].Name);
                     }
                     app.ask(app
