@@ -9,9 +9,9 @@ function closestBusStop(request, response) {
     
     const userInfo = (app) => {
         if (app.isPermissionGranted()) {
-            const address = app.getDeviceLocation().formattedAddress;
+            const address = app.getDeviceLocation().coordinates;
             if (address) {            
-                app.tell(`You are at ${address}`);
+                app.tell(`You are at ${address.latitude} ${address.longitude}`);
             }
             else {
                 // Note: Currently, precise locaton only returns lat/lng coordinates on phones and lat/lng coordinates 
