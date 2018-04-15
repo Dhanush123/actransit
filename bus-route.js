@@ -13,8 +13,13 @@ function getRoutesForStop (gBody, gRes) {
 	request(options, function (error, response, body) {
 	    if (error) throw new Error(error);
 	    var msg = "The following buses come here: \n";
+	    var seenRouteNames = {};
 	    for(var i = 0; i < body.length; i++) {
-	        msg += body[i]["RouteName"] +"\n";
+	    	var name = body[i]["RouteName"];
+	    	if (seenRouteNames[name]) {
+	        	msg += name +"\n";
+	        	seenRouteNames[name] = true;
+	    	}
 	    }
 	    console.log("msg",msg);
       	return gRes.json({
@@ -26,5 +31,4 @@ function getRoutesForStop (gBody, gRes) {
 
 module.exports = {
     getRoutesForStop: getRoutesForStop;
-    getStopForRoute: getStopForRoute
 };
