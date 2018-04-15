@@ -49,7 +49,7 @@ function getServiceNoticesHelper(notices, gRes, source) {
     return gRes.json({
       speech: msg,
       displayText: displayMsg,
-      messages: card
+      messages: link
     });
   } else {
     return gRes.json({
