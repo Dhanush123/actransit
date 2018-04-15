@@ -1,0 +1,22 @@
+{
+  "name": "actransit",
+  "version": "1.0.0",
+  "description": "sodahacks/cal innovates app",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dhanush123/actransit.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "dhanush patel, allen yin, jesse gao, sangbin cho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dhanush123/actransit/issues"
+  },
+  "homepage": "https://github.com/Dhanush123/actransit#readme"
+}
