@@ -20,7 +20,7 @@ function getServiceNotices(body, gRes) {
 function getServiceNoticesHelper(notices, gRes) {
   var msg = "";
   var displayMsg = "";
-  msg += "Here are the " + notices.length + "latest notices\n\n";
+  msg += "Here are the " + notices.length + "latest notices" + writeNewLine(2);
 
   for (var i = 0; i < notices.length; i++) {
     var notice = notices[i];
@@ -45,10 +45,10 @@ function getServiceNoticesHelper(notices, gRes) {
 function writeSpeechMessage(index, postDate, title, text, impactedRoutes) {
   /* return the message for a speaker to speak */
   var msg = "";
-  msg += index + 1 + "." + " " + postDate + "\n";
-  msg += "Title : " + title + "\n";
-  msg += text + "\n";
-  msg += "" + impactedRoutes + "\n";
+  msg += index + 1 + "." + " " + postDate + writeNewLine(1);
+  msg += "Title : " + title + writeNewLine(1);
+  msg += text + writeNewLine(1);
+  msg += "" + impactedRoutes + writeNewLine(1);
   return msg;
 }
 
@@ -56,7 +56,7 @@ function writeDisplayMessage(index, postDate, title, text, impactedRoutes, notic
   /* return the message that will be displayed in the chat */
   var displayMsg = "";
   displayMsg += writeSpeechMessage(index, postDate, title, text, impactedRoutes);
-  displayMsg += "For more information, please check " + noticeURL + "\n";
+  displayMsg += "For more information, please check " + noticeURL + writeNewLine(1);
   return displayMsg;
 }
 
@@ -64,7 +64,7 @@ function writeNewLine(numberOfNewLine) {
   /* write the new line as many as numberOfNewLine */
   var newLine = "";
   for (var i = 0; i < numberOfNewLine; i++) {
-    newLine += '\n';
+    newLine += '\n  \n';
   }
   return newLine;
 }
