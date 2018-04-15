@@ -11,7 +11,7 @@ function stopPredict(gBody, gRes) {
 	}
 
 	var stops = []
-    var stopID = null;
+    var stopID = gBody.result.parameters.stopID;
 
 	rp(op1)
     .then(response => {
@@ -25,18 +25,15 @@ function stopPredict(gBody, gRes) {
             console.log("The address " + gBody.result.parameters.address)
             stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address)).StopId
         }
-        else if (gBody.result.parameters.stopID != ''){
-            console.log("wrong adn " + gBody.result.parameters.stopID)
-            stopID = gBody.result.parameters.stopID;
-        }
-        else{
+    })
+    .then(() => {
+
+        if (stopID == null ){
             gRes.json({
                 speech: "I need either stop id or the address",
                 displayText: "I need either stop id or the address"
             });
         }
-    })
-    .then(() => {
         
 
         var options = { method: "GET",
