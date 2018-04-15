@@ -27,6 +27,7 @@ function stopPredict(gBody, gRes) {
     	stopID = stops.find(o => o.Name == gBody.result.parameters.address)
     }
     else if (gBody.result.parameters.stopID != undefined){
+        console.log("wrong adn " + gBody.result.parameters.stopID)
     	stopID = gBody.result.parameters.stopID;
     }
     else{
