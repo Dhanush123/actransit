@@ -56,4 +56,6 @@ function textFormatting(text) {
   return text.join('\n');
 }
 
-getServiceNotices(null, null);
+module.exports = {
+  getServiceNotices: getServiceNotices
+};
