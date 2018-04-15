@@ -35,8 +35,7 @@ function getServiceNoticesHelper(notices, gRes) {
     displayMsg += writeDisplayMessage(i, postDate, title, text, impactedRoutes, noticeURL);
     displayMsg += writeNewLine(2);
   }
-  console.log(msg);
-  console.log(displayMsg);
+
   return gRes.json({
     speech: msg,
     displayText: displayMsg
