@@ -38,7 +38,10 @@ function getServiceNoticesHelper(notices, gRes) {
 
   return gRes.json({
     speech: msg,
-    displayText: displayMsg
+    displayText: displayMsg,
+    destinationName: "more information",
+    platform: "google",
+    url: noticeURL
   });
 }
 
