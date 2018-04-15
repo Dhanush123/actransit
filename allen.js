@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const { DialogflowApp } = require('actions-on-google');
 
-function closestBusStop(req, res) {
+function closestBusStop(request, response) {
 
     const requestPermission = (app) => {
       app.askForPermission('To locate you', app.SupportedPermissions.DEVICE_PRECISE_LOCATION);
@@ -24,10 +24,11 @@ function closestBusStop(req, res) {
         }
     };
 
-    console.log("from allen request: ", req)
-    console.log("request body: ", req.body)
+    // console.log("from allen request: ", req)
+    // req.body_ = req.body
+    // console.log("request body: ", req.body_)
 
-    const app = new DialogflowApp({req, res});
+    const app = new DialogflowApp({request, response});
     const actions = new Map();
     actions.set('closestBusStop', requestPermission);
     actions.set('user_info', userInfo);
