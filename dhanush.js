@@ -2,6 +2,9 @@ const request = require("request");
 const rp = require('request-promise');
 const moment = require("moment");
 
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
 
 function stopPredict(gBody, gRes) {
 
@@ -21,7 +24,7 @@ function stopPredict(gBody, gRes) {
     })
     .then(() => {
         console.log("stopID is " + stopID)
-        if (gBody.result.parameters.stopID == '' && gBody.result.parameters.address != ''){
+        if (isEmpty(gBody.result.parameters.stopID) && !isEmpty(gBody.result.parameters.address){
             console.log("got in!")
             console.log("The address " + gBody.result.parameters.address)
             stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address)).StopId
@@ -29,7 +32,7 @@ function stopPredict(gBody, gRes) {
     })
     .then(() => {
 
-        if (stopID == null ){
+        if (isEmpty(stopID)){
             gRes.json({
                 speech: "I need either stop id or the address",
                 displayText: "I need either stop id or the address"
@@ -41,49 +44,50 @@ function stopPredict(gBody, gRes) {
             url: "http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=actransit&stopId="+stopID
         };
   
-      request(options, function (error, response, body) {
-        if (error) throw new Error(error);
-        var msg = "";
-        if (response.statusCode !== 200) {
-          msg = "Currently, predictions are not available for stop " + stopID + ". Please try later.";
-        } else {
-          body = JSON.parse(body);
-          console.log(body)
-          var predictions = []
-          if (body.predictions.length != undefined){
-            predictions = body.predictions.slice()
-          }
-          else{
-            predictions.push(body.predictions)
-          }
+        request(options, function (error, response, body) {
+            if (error) throw new Error(error);
+            var msg = "";
+            if (response.statusCode !== 200) {
+              msg = "Currently, predictions are not available for stop " + stopID + ". Please try later.";
+            } 
+            else {
+              body = JSON.parse(body);
+              console.log(body)
+              var predictions = []
+              if (body.predictions.length != undefined){
+                predictions = body.predictions.slice()
+              }
+              else{
+                predictions.push(body.predictions)
+              }
 
-          for(var i = 0; i < predictions.length; i++) {
-            msg += "Route " + predictions[i]["routeTitle"] + " will be arriving at "
-            if (predictions[i].direction == undefined){
-                gRes.json({
-                    speech: "No prediction",
-                    displayText: "No prediction"
-                });
-            }
-            else{
-                for(var j = 0; j < predictions[i].direction.prediction.length; j++){
-                    var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
-                    msg += time;
-                    if(j != predictions[i].direction.prediction.length-1){
-                        msg += ", ";
+              for(var i = 0; i < predictions.length; i++) {
+                msg += "Route " + predictions[i]["routeTitle"] + " will be arriving at "
+                if (predictions[i].direction == undefined){
+                    gRes.json({
+                        speech: "No prediction",
+                        displayText: "No prediction"
+                    });
+                }
+                else{
+                    for(var j = 0; j < predictions[i].direction.prediction.length; j++){
+                        var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
+                        msg += time;
+                        if(j != predictions[i].direction.prediction.length-1){
+                            msg += ", ";
+                        }
                     }
                 }
+                msg += "\n\n"
+              }
             }
-            msg += "\n\n"
-          }
-        }
 
-        gRes.json({
-            speech: msg,
-            displayText: msg
+            gRes.json({
+                speech: msg,
+                displayText: msg
+            });
+
         });
-
-      });
     })
     .catch(err => console.error(err))
 
