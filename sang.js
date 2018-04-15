@@ -47,7 +47,6 @@ function getServiceNoticesHelper(notices, gRes, source) {
           title: "More info"
         }
       ],
-      "formattedText": "AoG Card Description",
       image: {
         url: ""
       },
