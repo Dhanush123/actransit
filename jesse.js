@@ -13,19 +13,24 @@ function getRoutesForStop (gBody, gRes) {
 
 	request(options, function (error, response, body) {
 	    if (error) throw new Error(error);
+	    var msg = "";
+	    if (response.statusCode != 200) {
+	    	msg += "There are no routes for this stop id\n";
+			} else {
+        body = JSON.parse(body);
+        msg += "The following buses come here: \n";
+        var seenRouteNames = {};
+        for(var i = 0; i < body.length; i++) {
+          var name = body[i]["RouteName"];
+          console.log(body);
+          if (!seenRouteNames[name]) {
+            msg += "route " + name +"\n";
+            seenRouteNames[name] = true;
+          }
+        }
+        console.log("msg",msg);
+			}
 
-	    body = JSON.parse(body);
-	    var msg = "The following buses come here: \n";
-	    var seenRouteNames = {};
-	    for(var i = 0; i < body.length; i++) {
-	    	var name = body[i]["RouteName"];
-				console.log(body);
-	    	if (!seenRouteNames[name]) {
-	        	msg += "route " + name +"\n";
-	        	seenRouteNames[name] = true;
-	    	}
-	    }
-	    console.log("msg",msg);
       	return gRes.json({
 	        speech: msg,
 	        displayText: msg
