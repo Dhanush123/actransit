@@ -14,7 +14,7 @@ function stopPredict(gBody, gRes) {
     var msg = "";
     for(var i = 0; i < body.length; i++) {
         var time = moment(body[i]["PredictedDeparture"]);
-        msg += "Bus " + body[i]["VehicleId"] + ", " + body[i]["RouteName"] + ", will be arriving " + time.calendar() +"\n  \n";
+        msg += body[i]["RouteName"] + ", will be arriving " + time.calendar() +"\n  \n";
     }
     gRes.json({
         speech: msg,

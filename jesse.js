@@ -11,6 +11,7 @@ function getRoutesForStop (gBody, gRes) {
 	    url: "http://api.actransit.org/transit/stops/"+stopID+"/predictions/",
 	    qs: { token: token }};
 	request(options, function (error, response, body) {
+		
 	    if (error) throw new Error(error);
 	    var msg = "The following buses come here: \n";
 	    for(var i = 0; i < body.length; i++) {
