@@ -3,13 +3,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 
+//custom imports
+const dhanush = require('dhanush.js');
+//end here
+
 const server = express();
 server.use(bodyParser.json());
 
 server.post('/', function (req, res) {
     console.log('webhook request:',req.body);
     if (req.body.result.action == "stopPredict") {
-      //call function here
+      dhanush.stopPredict(req.body,res);
     }
     else {
       var speech = "An error has occured.";
