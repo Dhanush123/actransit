@@ -5,8 +5,7 @@ const moment = require("moment");
 function stopPredict(gBody, gRes) {
     var stopID = gBody.result.parameters.stopID;
     var options = { method: "GET",
-    url: "http://api.actransit.org/transit/stops/"+stopID+"/predictions/",
-    qs: { token: "E0CA7D29754DBC1A2945AC2B353206DD" }
+    	url: "http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=actransit&stopId="+stopID
     };
   
   request(options, function (error, response, body) {
@@ -16,19 +15,32 @@ function stopPredict(gBody, gRes) {
       msg = "Currently, predictions are not available for stop " + stopID + ". Please try later.";
     } else {
       body = JSON.parse(body);
-      for(var i = 0; i < body.length; i++) {
-        var time = moment(body[i]["PredictedDeparture"]);
-        msg += body[i]["RouteName"] + " will be arriving " + time.calendar() +"\n  \n";
+      const predictions = []
+      if (body.predictions.length != undefined){
+      	predictions = body.predictions
+      }
+      else{
+      	predictions.push(body.predictions)
+      }
+
+      for(var i = 0; i < predictions.length; i++) {
+      	msg += "Route " + body.predictions[i]["routeTitle"] + " will be arriving at "
+      	for(var j = 0; j < predictions[i].direction.prediction.length; j++){
+	        var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]);
+	        msg += time;
+	        if(j != predictions[i].direction.prediction.length-1){
+	        	msg += ", ";
+	        }
+      	}
+      	msg += "\n"
       }
       console.log(JSON.stringify(body));
-      msg = msg.substring(0, 1600);
     }
     gRes.json({
         speech: msg,
         displayText: msg
     });
   });
-  
 }
 
 module.exports = {
