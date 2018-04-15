@@ -20,8 +20,10 @@
   },
   "homepage": "https://github.com/Dhanush123/actransit#readme",
   "dependencies": {
+    "actions-on-google": "^1.10.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
-    "request": "^2.85.0"
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
   }
 }
