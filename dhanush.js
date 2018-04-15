@@ -1,4 +1,6 @@
 const request = require("request");
+const moment = require("moment");
+
 
 function stopRequest(gBody, gRes) {
     var stopID = gBody.result.parameters.stopID;
@@ -11,7 +13,8 @@ function stopRequest(gBody, gRes) {
     if (error) throw new Error(error);
     var msg = "";
     for(var i = 0; i < body.length; i++) {
-        var x = 0;
+        var time = moment(body[0]["PredictedDeparture"]);
+        msg += "Bus " + body[0]["VehicleId"] + ", " + body[0]["RouteName"] + ", will be arriving " + time.calendar() +"\n";
     }
   });
   

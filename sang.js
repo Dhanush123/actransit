@@ -1,0 +1,62 @@
+/*
+*   Return latest 3 service notices
+* */
+var request = require('request');
+
+function getServiceNotices(body, gRes) {
+  // TODO fix this part. It is hardcoded now.
+  const APIKey = "E0CA7D29754DBC1A2945AC2B353206DD";
+  const apiEndpoint = "http://api.actransit.org/transit/servicenotices/?token=" + APIKey;
+  var option = {
+    method: 'GET',
+    url: apiEndpoint,
+  };
+
+  request(option, function(err, res, body) {
+    var notices = JSON.parse(body).slice(0, 2);
+    getServiceNoticesHelper(notices, gRes);
+  });
+}
+
+function getServiceNoticesHelper(notices, gRes) {
+  var msg = "";
+  msg += "Today's notices\n";
+  msg += "Here are 3 latest notices\n\n";
+  for (var i = 0; i < notices.length; i++) {
+    var notice = notices[i];
+    var postDate = notice.PostDate;
+    var title = notice.Title;
+    var text = textFormatting(notice.NoticeText);
+    var noticeURL = notice.Url;
+    var impactedRoutes = impactedRoutesFormatting(notice.ImpactedRoutes);
+    msg += i + 1 + "." + " " + postDate + "\n";
+    msg += "Title : " + title + "\n";
+    msg += text + "\n";
+    msg += "For more information, please check " + noticeURL + "\n";
+    msg += "" + impactedRoutes + "\n\n\n";
+  }
+  return gRes.json({
+    speech: msg,
+    displayText: msg
+  });
+}
+
+// util
+function impactedRoutesFormatting(impactedRoutes) {
+  var formattedString = "";
+  impactedRoutes.forEach(function(route) {
+    formattedString += route + " ";
+  });
+  formattedString += "will be affected";
+  return formattedString;
+}
+
+function textFormatting(text) {
+  text = [text.split("<hr />")[0]].join('');
+  text = [text.split('\r\n\r\n')[0]].join('');
+  return text;
+}
+
+module.exports = {
+  getServiceNotices: getServiceNotices
+};
