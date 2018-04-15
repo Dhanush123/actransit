@@ -6,7 +6,7 @@ function stopPredict(gBody, gRes) {
     var stopID = gBody.result.parameters.stopID;
     var options = { method: "GET",
     url: "http://api.actransit.org/transit/stops/"+stopID+"/predictions/",
-    qs: { token: "E0CA7D29754DBC1A2945AC2B353206DD" },
+    qs: { token: "E0CA7D29754DBC1A2945AC2B353206DD" }
     };
   
   request(options, function (error, response, body) {
@@ -15,7 +15,7 @@ function stopPredict(gBody, gRes) {
     body = JSON.parse(body);
     for(var i = 0; i < body.length; i++) {
         var time = moment(body[i]["PredictedDeparture"]);
-        msg += body[i]["RouteName"] + ", will be arriving " + time.calendar() +"\n  \n";
+        msg += body[i]["RouteName"] + " will be arriving " + time.calendar() +"\n  \n";
     }
     console.log(JSON.stringify(body));
     msg = msg.substring(0, 1600);
