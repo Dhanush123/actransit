@@ -5,7 +5,7 @@ const request = require('request');
 
 //custom imports
 const dhanush = require('./dhanush');
-const allen = require('./allen');
+const closestBusStop = require('./allen');
 //end here
 
 const server = express();
