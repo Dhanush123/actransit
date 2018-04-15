@@ -69,7 +69,8 @@ function stopPredict(gBody, gRes) {
                     });
                 }
                 else{
-                    console.log("prediction is " + predictions[i].direction.prediction)
+                    console.log("prediction is " + Object.keys(predictions[i].direction.prediction))
+                    console.log("is array? " + predictions[i].direction.prediction instanceof Array)
                     for(var j = 0; j < predictions[i].direction.prediction.length; j++){
                         var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
                         console.log("The time is " + time)
