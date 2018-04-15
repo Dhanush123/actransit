@@ -24,8 +24,8 @@ function closestBusStop(request, response) {
                     const the_stop = JSON.parse(response)[0];
                     app.tell(app
                         .buildRichResponse()
-                        .addSimpleResponse(`Bus stop at ${Object.keys(the_stop)}`)
-                        .addSuggestionLink("Google map", `https://www.google.com/maps/@?api=1&map_action=map&center=${the_stop.latitude},${the_stop.longitude}&zoom=12`))
+                        .addSimpleResponse(`Bus stop at ${the_stop.Name}`)
+                        .addSuggestionLink("Google map", `https://www.google.com/maps/@?api=1&map_action=map&center=${the_stop.Latitude},${the_stop.Longitude}&zoom=12`))
                 })
                 .catch(err => app.tell('Sorry, I could not find any bus stops near you.'));
             }
