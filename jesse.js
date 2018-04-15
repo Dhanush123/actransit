@@ -15,7 +15,7 @@ function getRoutesForStop (gBody, gRes) {
 	    if (error) throw new Error(error);
 	    var msg = "";
 	    if (response.statusCode != 200) {
-	    	msg += "There are no routes for this stop id\n";
+	    	msg += "Currently, there is no information available\n";
 			} else {
         body = JSON.parse(body);
         msg += "The following buses come here: \n";
