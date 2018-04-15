@@ -6,6 +6,7 @@ const request = require('request');
 //custom imports
 const dhanush = require('./dhanush');
 const allen = require('./allen');
+const sang = require('./sang');
 //end here
 
 const server = express();
@@ -20,6 +21,9 @@ server.post('/', function (req, res) {
             break;
         case "closestBusStop":
             allen.closestBusStop(req.body, res);
+            break;
+        case "getServiceNotices":
+            sang.getServiceNotices(req.body,res);
             break;
         default:
             var speech = "An error has occured.";
