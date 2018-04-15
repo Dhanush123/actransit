@@ -11,7 +11,7 @@ function stopPredict(gBody, gRes) {
 	}
 
 	var stops = []
-    console.log("parameters " + Object.keys(gBody.result.parameters))
+    console.log("parameters " + Object.keys(gBody.result.parameters)
     var stopID = gBody.result.parameters.stopID;
 
 	rp(op1)
@@ -21,8 +21,7 @@ function stopPredict(gBody, gRes) {
     })
     .then(() => {
         console.log("stopID is " + stopID)
-        console.log("address is " + gBody.result.parameters.address)
-        if (stopID == null && gBody.result.parameters.address != ''){
+        if (gBody.result.parameters.stopID == '' && gBody.result.parameters.address != ''){
             console.log("got in!")
             console.log("The address " + gBody.result.parameters.address)
             stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address)).StopId
@@ -31,10 +30,10 @@ function stopPredict(gBody, gRes) {
     .then(() => {
 
         if (stopID == null ){
-            gRes.end(JSON.stringify({
+            gRes.json({
                 speech: "I need either stop id or the address",
                 displayText: "I need either stop id or the address"
-            }));
+            });
         }
         
 
