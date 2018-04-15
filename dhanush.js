@@ -5,7 +5,7 @@ const moment = require("moment");
 function stopPredict(gBody, gRes) {
     var stopID = gBody.result.parameters.stopID;
     var options = { method: "GET",
-    url: "http://webservices.nextbus.com/service/publicXMLFeed?command=predictions&a=actransit&stopId="+stopID
+    url: "http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=actransit&stopId="+stopID
     };
   
   request(options, function (error, response, body) {
