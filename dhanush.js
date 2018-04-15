@@ -25,5 +25,5 @@ function stopPredict(gBody, gRes) {
 }
 
 module.exports = {
-    stopRequest: stopRequest
+    stopPredict: stopPredict
 };
