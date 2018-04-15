@@ -16,7 +16,7 @@ function getRoutesForStop (gBody, gRes) {
 	    var seenRouteNames = {};
 	    for(var i = 0; i < body.length; i++) {
 	    	var name = body[i]["RouteName"];
-		console.log(name);
+		console.log(body);
 	    	if (!seenRouteNames[name]) {
 	        	msg += name +"\n";
 	        	seenRouteNames[name] = true;
