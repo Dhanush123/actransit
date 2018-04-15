@@ -10,19 +10,17 @@ function closestBusStop(request, response) {
     const userInfo = (app) => {
         if (app.isPermissionGranted()) {
             const address = app.getDeviceLocation().address;
-
-            console.log("userInfo is being called")
             if (address) {            
-                app.tell({speech: `You are at ${address}`, displayText: `You are at ${address}`});
+                app.tell(`You are at ${address}`);
             }
             else {
                 // Note: Currently, precise locaton only returns lat/lng coordinates on phones and lat/lng coordinates 
                 // and a geocoded address on voice-activated speakers. 
                 // Coarse location only works on voice-activated speakers.
-                app.tell({speech: 'Sorry, I could not figure out where you are.', displayText: 'Sorry, I could not figure out where you are.'});
+                app.tell('Sorry, I could not figure out where you are.');
             }
         } else {
-            app.tell({speech: 'Sorry, I could not figure out where you are.', displayText: 'Sorry, I could not figure out where you are.'});
+            app.tell('Sorry, I could not figure out where you are.');
         }
     };
 
