@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const { DialogflowApp } = require('actions-on-google');
 
-function closestBusStop(body, res) {
+function closestBusStop(req, res) {
 
     const requestPermission = (app) => {
       app.askForPermission('To locate you', app.SupportedPermissions.DEVICE_PRECISE_LOCATION);
@@ -24,7 +24,7 @@ function closestBusStop(body, res) {
         }
     };
 
-    const app = new DialogflowApp({request, response});
+    const app = new DialogflowApp({req, res});
     const actions = new Map();
     actions.set('closestBusStop', requestPermission);
     actions.set('user_info', userInfo);
