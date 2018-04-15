@@ -24,12 +24,12 @@ function closestBusStop(request, response) {
                     const the_stop = JSON.parse(response)[0];
                     const stop= JSON.parse(response);
                     var stops_names = [];
-                    for(var i = 0; i < 4; i++){
+                    for(var i = 0; i < 3; i++){
                         stops_names.push(stop[i].Name);
                     }
                     app.ask(app
                         .buildRichResponse()
-                        .addSimpleResponse(`Nearby stations: ${stops_names[0]}, ${stops_names[1]}, ${stops_names[2]}. ` + 
+                        .addSimpleResponse(`Nearby stations: ${stops_names[0]}, ${stops_names[1]}. ` + 
                             "Pick one to see buses coming. "
                             )
                         .addSuggestions(stops_names)

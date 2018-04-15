@@ -3,6 +3,23 @@ const moment = require("moment");
 
 
 function stopPredict(gBody, gRes) {
+
+	var op1 = {
+		method: "GET", 
+		url: "http://api.actransit.org/transit/stops?token=E0CA7D29754DBC1A2945AC2B353206DD"
+	}
+
+	var stops = []
+
+	rp(op1)
+    	.then(response => {
+    		stops = JSON.parse(response)
+    		console.log("The stops are " + stops)
+    	})
+    	.catch(err => console.error(err))
+
+
+
     var stopID = gBody.result.parameters.stopID;
     var options = { method: "GET",
     	url: "http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=actransit&stopId="+stopID
