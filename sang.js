@@ -12,7 +12,7 @@ function getServiceNotices(body, gRes) {
   };
 
   request(option, function(err, res, body) {
-    var notices = JSON.parse(body).slice(0, 2);
+    var notices = JSON.parse(body).slice(0, 1);
     getServiceNoticesHelper(notices, gRes);
   });
 }
@@ -20,7 +20,7 @@ function getServiceNotices(body, gRes) {
 function getServiceNoticesHelper(notices, gRes) {
   var msg = "";
   var displayMsg = "";
-  msg += "Here are the " + notices.length + "latest notices" + writeNewLine(2);
+  msg += "Here are the latest service notice" + writeNewLine(2);
 
   for (var i = 0; i < notices.length; i++) {
     var notice = notices[i];
