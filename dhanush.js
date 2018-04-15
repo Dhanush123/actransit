@@ -24,7 +24,7 @@ function stopPredict(gBody, gRes) {
     })
     .then(() => {
         console.log("stopID is " + stopID)
-        if (isEmpty(gBody.result.parameters.stopID) && !isEmpty(gBody.result.parameters.address){
+        if (isEmpty(gBody.result.parameters.stopID) && !isEmpty(gBody.result.parameters.address)){
             console.log("got in!")
             console.log("The address " + gBody.result.parameters.address)
             stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address)).StopId
