@@ -25,7 +25,6 @@ function stopPredict(gBody, gRes) {
         console.log("address is " + gBody.result.parameters.address)
         if (isEmpty(gBody.result.parameters.stopID) && !isEmpty(gBody.result.parameters.address)){
             console.log("got in!")
-            console.log("The address " + gBody.result.parameters.address)
             stopID = stops.find(o => o.Name.includes(gBody.result.parameters.address)).StopId
         }
     })
@@ -70,9 +69,10 @@ function stopPredict(gBody, gRes) {
                     });
                 }
                 else{
-                    console.log("have predictions")
+                    console.log("length " + predictions[i].direction.prediction.length)
                     for(var j = 0; j < predictions[i].direction.prediction.length; j++){
                         var time = moment.unix(predictions[i].direction.prediction[j]["epochTime"]).format('hh:mm a');
+                        console.log("The time is " + time)
                         msg += time;
                         if(j != predictions[i].direction.prediction.length-1){
                             msg += ", ";
