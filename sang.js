@@ -49,7 +49,7 @@ function getServiceNoticesHelper(notices, gRes, source) {
       displayText: displayMsg,
       speech: msg,
       platform: "google",
-      type: "simple_response"
+      type: 0
     };
 
     var msgObject = {
