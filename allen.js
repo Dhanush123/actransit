@@ -20,7 +20,7 @@ function closestBusStop(request, response) {
                 app.tell('Sorry, I could not figure out where you are.');
             }
         } else {
-            app.tell('Sorry, I could not figure out where you are.');
+            app.tell('Good luck finding the bus stop, lol.');
         }
     };
 
