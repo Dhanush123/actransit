@@ -86,7 +86,7 @@ function writeDisplayMessage(index, postDate, title, text, impactedRoutes, notic
   /* return the message that will be displayed in the chat */
   var displayMsg = "";
   displayMsg += writeSpeechMessage(index, postDate, title, text, impactedRoutes);
-  displayMsg += "For more information, please check " + noticeURL + "." + writeNewLine(1);
+  displayMsg += "For more information, please open more information." + writeNewLine(1);
   return displayMsg;
 }
 
