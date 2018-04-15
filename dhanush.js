@@ -31,10 +31,10 @@ function stopPredict(gBody, gRes) {
     .then(() => {
 
         if (stopID == null ){
-            gRes.json({
+            gRes.end(JSON.stringify({
                 speech: "I need either stop id or the address",
                 displayText: "I need either stop id or the address"
-            });
+            }));
         }
         
 
