@@ -5,7 +5,7 @@ const moment = require("moment");
 function stopPredict(gBody, gRes) {
     var stopID = gBody.result.parameters.stopID;
     var options = { method: "GET",
-    url: "http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=actransit&stopId="+stopID
+    	url: "http://webservices.nextbus.com/service/publicJSONFeed?command=predictions&a=actransit&stopId="+stopID
     };
   
   request(options, function (error, response, body) {
@@ -15,6 +15,7 @@ function stopPredict(gBody, gRes) {
       msg = "Currently, predictions are not available for stop " + stopID + ". Please try later.";
     } else {
       body = JSON.parse(body);
+      body = body.predictions.direction.prediction
       for(var i = 0; i < body.length; i++) {
         var time = moment(body[i]["PredictedDeparture"]);
         msg += body[i]["RouteName"] + " will be arriving " + time.calendar() +"\n  \n";
@@ -27,7 +28,6 @@ function stopPredict(gBody, gRes) {
         displayText: msg
     });
   });
-  
 }
 
 module.exports = {
