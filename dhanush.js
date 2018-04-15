@@ -15,7 +15,7 @@ function stopPredict(gBody, gRes) {
 	rp(op1)
     .then(response => {
         stops = JSON.parse(response)
-        console.log("The stops are " + stops)
+        console.log("The stops are " + stops[0])
     })
     .catch(err => console.error(err))
 
