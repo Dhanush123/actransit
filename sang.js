@@ -3,7 +3,7 @@
 * */
 var request = require('request');
 
-function getServiceNotices(body, gRes) {
+function getServiceNotices(gBody, gRes) {
   const APIKey = "E0CA7D29754DBC1A2945AC2B353206DD";
   const apiEndpoint = "http://api.actransit.org/transit/servicenotices/?token=" + APIKey;
   var option = {
@@ -13,7 +13,8 @@ function getServiceNotices(body, gRes) {
 
   request(option, function(err, res, body) {
     var notices = JSON.parse(body).slice(0, 1);
-    var source = body.originalRequest.source;
+    console.log(gBody);
+    var source = gBody.originalRequest.source;
     getServiceNoticesHelper(notices, gRes, source);
   });
 }
@@ -45,11 +46,15 @@ function getServiceNoticesHelper(notices, gRes, source) {
       url: noticeURL
     };
 
-    return gRes.json({
+    var msgObject = {
       speech: msg,
       displayText: displayMsg,
-      messages: card
-    });
+      messages: [link]
+    };
+
+    console.log(JSON.stringify(msgObject));
+
+    return gRes.json(msgObject);
   } else {
     return gRes.json({
       speech: msg,
