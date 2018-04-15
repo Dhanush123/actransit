@@ -38,22 +38,36 @@ function getServiceNoticesHelper(notices, gRes, source) {
   }
 
   if (source === 'google') {
-    var link = {
-      destinationName: "more information",
+    var cardSent =   {
+      buttons: [
+        {
+          openUrlAction: {
+            url: noticeURL
+          },
+          title: "More info"
+        }
+      ],
+      "formattedText": "AoG Card Description",
+      image: {
+        url: ""
+      },
       platform: "google",
-      type: "link_out_chip",
-      url: noticeURL
+      subtitle: "link url",
+      title: "url",
+      type: "basic_card"
+    };
+
+    var messageSent  = {
+      displayText: displayMsg,
+      speech: msg,
+      platform: "google",
+      type: "simple_response"
     };
 
     var msgObject = {
       messages: [
-        {
-          displayText: displayMsg,
-          platform: "google",
-          textToSpeech: "Audio response",
-          type: "simple_response"
-        },
-        link
+        messageSent,
+        cardSent
       ]
     };
 
