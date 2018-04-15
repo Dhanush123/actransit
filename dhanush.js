@@ -11,7 +11,7 @@ function stopPredict(gBody, gRes) {
 	}
 
 	var stops = []
-    console.log("parameters " + Object.keys(gBody.result.parameters)
+    console.log("parameters " + Object.keys(gBody.result.parameters))
     var stopID = gBody.result.parameters.stopID;
 
 	rp(op1)
