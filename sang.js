@@ -46,11 +46,15 @@ function getServiceNoticesHelper(notices, gRes, source) {
       url: noticeURL
     };
 
-    return gRes.json({
+    var msgObject = {
       speech: msg,
       displayText: displayMsg,
-      messages: link
-    });
+      messages: [link]
+    };
+
+    console.log(JSON.stringify(msgObject));
+
+    return gRes.json(msgObject);
   } else {
     return gRes.json({
       speech: msg,
